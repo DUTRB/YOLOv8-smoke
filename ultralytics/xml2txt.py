@@ -9,8 +9,8 @@ from os import getcwd
 from os.path import join
 import glob
 
-sets = ['train']#分别保存训练集和测试集的文件夹名称
-classes = ['smoke']#标注时的标签
+sets = ['train']            #分别保存训练集和测试集的文件夹名称
+classes = ['smoke']         #标注时的标签
 
 '''
 xml中框的左上角坐标和右下角坐标(x1,y1,x2,y2)
@@ -30,8 +30,8 @@ def convert(size, box):
     return (x, y, w, h)
     
 def convert_annotation(data_dir,imageset,image_id):
-    in_file = open(data_dir+'/%s.xml' % (image_id)) #读取xml
-    out_file = open(data_dir+'/train_labels/%s.txt' % (image_id), 'w') #保存txt
+    in_file = open(data_dir+'/%s.xml' % (image_id))                     #读取xml
+    out_file = open(data_dir+'/train_labels/%s.txt' % (image_id), 'w')  #保存txt
     
     tree = ET.parse(in_file)
     root = tree.getroot()
@@ -43,7 +43,7 @@ def convert_annotation(data_dir,imageset,image_id):
         cls = obj.find('name').text
         if cls not in classes or int(difficult) == 1:
             continue
-        cls_id = classes.index(cls)#获取类别索引
+        cls_id = classes.index(cls)             #获取类别索引
         xmlbox = obj.find('bndbox')
         b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text),
              float(xmlbox.find('ymax').text))
@@ -51,7 +51,7 @@ def convert_annotation(data_dir,imageset,image_id):
         out_file.write(str(cls_id) + " " + " ".join([str('%.6f'%a) for a in bb]) + '\n')
 
 wd = getcwd()
-print(wd)#当前路径
+print(wd)           #当前路径
 
 data_dir='F:/1_研究生毕设/图像处理论文/中科大烟雾火灾实验室/RF_dataset/train_annotations'
 

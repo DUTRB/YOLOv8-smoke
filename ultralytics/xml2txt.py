@@ -1,6 +1,6 @@
 '''
 https://blog.csdn.net/weixin_42899627/article/details/114849764
-查看详细解释
+查看CSDN详细解释
 '''
 
 import xml.etree.ElementTree as ET

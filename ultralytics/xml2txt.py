@@ -30,8 +30,8 @@ def convert(size, box):
     return (x, y, w, h)
     
 def convert_annotation(data_dir,imageset,image_id):
-    in_file = open(data_dir+'/%s.xml' % (image_id))                     #读取xml
-    out_file = open(data_dir+'/train_labels/%s.txt' % (image_id), 'w')  #保存txt
+    in_file = open(data_dir+'/Annotations/%s.xml' % (image_id))                     #读取xml
+    out_file = open(data_dir+'/yolo_all_Annotations/%s.txt' % (image_id), 'w')  #保存txt
     
     tree = ET.parse(in_file)
     root = tree.getroot()
@@ -53,11 +53,11 @@ def convert_annotation(data_dir,imageset,image_id):
 wd = getcwd()
 print(wd)           #当前路径
 
-data_dir='F:/1_研究生毕设/图像处理论文/中科大烟雾火灾实验室/RF_dataset/train_annotations'
+data_dir='E:/DataSet/RF_dataset'
 
 for image_set in sets:
     image_ids=[]
-    for x in glob.glob(data_dir+'/*.xml'):
+    for x in glob.glob(data_dir+'/Annotations/*.xml'):
         print(x)
         image_ids.append(os.path.basename(x)[:-4])        
     print('\n%s数量:'%image_set,len(image_ids))#确认数量
